@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0b0f14"><link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../css/style.css"><script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script><title>Qwen LLM Inference on NVIDIA H200 | Ahmed Mejri</title><meta name="description" content="Case study: serving a 27B Qwen model with vLLM on an NVIDIA H200 on Kubernetes with an OpenAI-compatible API.">
+</head><body><header class="nav"><div class="wrap navin"><a class="logo" href="../index.html#home"><span>~/</span>ahmed.mejri</a><a class="btn" href="../index.html#projects">← All projects</a></div></header><main class="wrap page">
+<p class="mono tag">Case study · 2026</p><h1 style="font-size:2.4rem">Qwen LLM Inference on NVIDIA H200</h1>
+<h2>1. Overview</h2><p>Deployed and validated a 27B-parameter Qwen model served with vLLM on an NVIDIA H200 GPU, on Kubernetes, exposing an OpenAI-compatible API for a customer application.</p>
+<h2>2. Challenge</h2><p>Serve a large model reliably on shared GPU infrastructure: confirm the model is supported by the chosen vLLM version, store the weights on shared storage, and expose the API securely to an external application.</p>
+<h2>3. Environment</h2><p>GPU-based HPC platform with Kubernetes, NVIDIA H200 and BeeGFS storage. Customer-specific details are intentionally omitted.</p>
+<h2>4. Architecture</h2>
+<pre class="diagram mono" aria-label="Inference architecture">Application
+   │
+NGINX Ingress   (source-IP restrictions, inference proxy timeouts)
+   │
+ClusterIP Service
+   │
+vLLM pod  ── OpenAI-compatible API
+   │  Qwen 27B · BF16 · TP=1 · 32K context
+NVIDIA H200 (GPU-enabled node)</pre>
+<h2>5. Implementation</h2><p>Inspected the model configuration and verified architecture compatibility with the selected vLLM version before deployment, then deployed the service on Kubernetes.</p>
+<h2>6. Storage</h2>
+<pre class="diagram mono">Kubernetes pod → RWX PVC (200 GiB) → BeeGFS → Qwen model storage</pre><p>Validated model weights, ownership, permissions and Kubernetes security contexts.</p>
+<h2>7. GPU configuration</h2><p>Single NVIDIA H200, BF16, tensor parallelism 1. GPU memory utilization was checked after model initialization.</p>
+<h2>8. vLLM configuration</h2><p>32K served context, OpenAI-compatible API, with KV-cache and context-length sizing as part of the setup.</p>
+<h2>9. Kubernetes configuration</h2><p>Workload exposed through a ClusterIP Service; resources provisioned following the platform's quota, namespace and access practices.</p>
+<h2>10. Networking / Ingress</h2><p>NGINX Ingress with source-IP restrictions and inference-oriented proxy timeouts. Coordinated with the firewall team to enable application connectivity.</p>
+<h2>11. Validation</h2><ul><li>Model discovery and health endpoint</li><li>Chat completions</li><li>Structured JSON output</li><li>Token-level logprobs with Top-5 alternatives</li><li>Per-request thinking control</li><li>GPU memory utilization after initialization</li></ul>
+<h2>12. Monitoring</h2><p>The platform is monitored for GPU, node, Kubernetes and BeeGFS health as part of my day-to-day operations role.</p>
+<h2>13. Result</h2><p>A validated, customer-facing OpenAI-compatible inference endpoint running on the H200. No performance figures are published here.</p>
+<h2>14. Lessons learned</h2><ul><li>Check model architecture against the vLLM version before deploying.</li><li>Validate storage permissions and security contexts early.</li><li>Test the full API surface, not only the health endpoint.</li><li>Set proxy timeouts for long-running inference requests.</li></ul>
+<h2>Read the full article</h2><p><a class="btn" href="https://www.linkedin.com/pulse/deploying-production-ready-llm-inference-stack-kubernetes-ahmed-mejri-rlhhf/" target="_blank" rel="noopener">Read Article on LinkedIn</a></p><h2>15. Technologies</h2><ul class="tags"><li>vLLM</li><li>Kubernetes</li><li>NVIDIA H200</li><li>BeeGFS</li><li>NGINX Ingress</li><li>OpenAI-compatible API</li></ul>
+<p class="cta"><a class="btn primary" href="../index.html#contact">Contact Me</a><a class="btn" href="../assets/Ahmed-Mejri-HPC-Systems-Engineer-CV.pdf" download>Download CV</a></p></main><footer><div class="wrap mono">© Ahmed Mejri · <a href="../index.html">Portfolio home</a></div></footer></body></html>

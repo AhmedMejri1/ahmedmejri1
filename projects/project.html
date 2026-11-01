@@ -1,0 +1,15 @@
+<!DOCTYPE html><html lang="en" data-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0b0f14"><link rel="icon" href="../assets/images/favicon.svg" type="image/svg+xml"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../css/style.css"><script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script><title>Project | Ahmed Mejri</title>
+</head><body><header class="nav"><div class="wrap navin"><a class="logo" href="../index.html#home"><span>~/</span>ahmed.mejri</a><a class="btn" href="../index.html#projects">← All projects</a></div></header><main class="wrap page">
+<div id="p"></div>
+<p class="cta"><a class="btn primary" href="../index.html#contact">Contact Me</a><a class="btn" href="../assets/Ahmed-Mejri-HPC-Systems-Engineer-CV.pdf" download>Download CV</a></p></main><footer><div class="wrap mono">© Ahmed Mejri · <a href="../index.html">Portfolio home</a></div></footer>
+<script src="../js/projects.js"></script>
+<script>
+const id=new URLSearchParams(location.search).get('id'),p=PROJECTS.find(x=>x.id===id),d=document.getElementById('p');
+const e=(t,x)=>{const n=document.createElement(t);n.textContent=x;return n};
+if(!p){d.append(e('h1','Project not found'))}else{document.title=p.title+' | Ahmed Mejri';
+const m=e('p',p.year+' · '+p.cat);m.className='mono tag';const h=e('h1',p.title);h.style.fontSize='2rem';
+d.append(m,h,e('h2','Overview'),e('p',p.desc),e('h2','Engineering contribution'),e('p',p.contrib),e('h2','Outcome'),e('p',p.outcome),e('h2','Technologies'));
+const u=document.createElement('ul');u.className='tags';p.tech.forEach(t=>u.append(Object.assign(document.createElement('li'),{textContent:t})));d.append(u);
+const l=document.createElement('p');l.className='cta';p.links.filter(x=>!x[1].startsWith('projects/')).forEach(([t,hr])=>{const a=e('a',t);a.className='btn';a.href=hr;a.target='_blank';a.rel='noopener';l.append(a)});d.append(l);
+if(id==='azerbaijan-hpc')d.append(e('p','Customer-specific infrastructure details are intentionally not published.'))}
+</script></body></html>

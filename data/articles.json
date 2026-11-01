@@ -1,0 +1,27 @@
+[
+ {
+  "title": "Building a Production HPC Cluster",
+  "url": "https://medium.com/@ahmedmejri5/building-a-production-hpc-cluster-c23513d42399?sharedUserId=ahmedmejri5",
+  "summary": "OpenHPC cluster build with Warewulf, Slurm and Lustre."
+ },
+ {
+  "title": "Deploying a Production-Ready LLM Inference Stack on Kubernetes: From Model Validation to API Exposure",
+  "url": "https://www.linkedin.com/pulse/deploying-production-ready-llm-inference-stack-kubernetes-ahmed-mejri-rlhhf/",
+  "summary": "LLM inference on Kubernetes, from model validation to API exposure. Published on LinkedIn."
+ },
+ {
+  "title": "Building an HPC Storage Home Lab (Lustre-Based)",
+  "url": "https://medium.com/@ahmedmejri5/building-an-hpc-storage-home-lab-lustre-based-31c41f83fd79?sharedUserId=ahmedmejri5",
+  "summary": "Home-lab guide to a Lustre-based HPC storage environment."
+ },
+ {
+  "title": "Installing OpenPBS on Ubuntu 24.04: A Professional Guide",
+  "url": "https://medium.com/@ahmedmejri5/installing-openpbs-on-ubuntu-24-04-a-professional-guide-36c77df4225f?sharedUserId=ahmedmejri5",
+  "summary": "Step-by-step OpenPBS installation guide."
+ },
+ {
+  "title": "Getting Started with Aruba’s AOS-CX Simulator: Setup Guide",
+  "url": "https://medium.com/@ahmedmejri5/getting-started-with-arubas-aos-cx-simulator-setup-guide-52829588cb6c?sharedUserId=ahmedmejri5",
+  "summary": "Setup guide for the Aruba AOS-CX network simulator."
+ }
+]
